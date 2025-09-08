@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ucaeon.yumbook.common.dto.ApiResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeCreateResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
 import com.ucaeon.yumbook.recipe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +46,19 @@ public class RecipeController {
                 "레시피 목록 조회에 성공했습니다.",
                 recipes
         );
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponseDto<RecipeDetailResponseDto>> getRecipeById(@PathVariable Long id) {
+        RecipeDetailResponseDto recipe = recipeService.getRecipeById(id);
+        
+        ApiResponseDto<RecipeDetailResponseDto> responseBody = ApiResponseDto.success(
+                HttpStatus.OK,
+                "레시피 상세 조회에 성공했습니다.",
+                recipe
+        );
+        
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
