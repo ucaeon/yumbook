@@ -1,16 +1,19 @@
 package com.ucaeon.yumbook.recipe.controller;
 
-import com.ucaeon.yumbook.common.dto.ApiResponseDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeCreateResponseDto;
-import com.ucaeon.yumbook.recipe.service.RecipeService;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.ucaeon.yumbook.common.dto.ApiResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeCreateResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
+import com.ucaeon.yumbook.recipe.service.RecipeService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,7 +32,18 @@ public class RecipeController {
                 "레시피 생성에 성공했습니다.",
                 responseData
         );
-
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
+    }
+
+    @GetMapping
+    public ResponseEntity<ApiResponseDto<List<RecipeListResponseDto>>> getAllRecipes() {
+        List<RecipeListResponseDto> recipes = recipeService.getAllRecipes();
+        
+        ApiResponseDto<List<RecipeListResponseDto>> responseBody = ApiResponseDto.success(
+                HttpStatus.OK,
+                "레시피 목록 조회에 성공했습니다.",
+                recipes
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
