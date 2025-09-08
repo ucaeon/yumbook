@@ -12,6 +12,7 @@ import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeUpdateRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeUpdateResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeDeleteResponseDto;
 import com.ucaeon.yumbook.recipe.repository.RecipeRepository;
 
 import jakarta.transaction.Transactional;
@@ -38,6 +39,7 @@ public class RecipeService {
                 .toList();
     }
 
+
     public RecipeDetailResponseDto getRecipeById(Long id) {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.RECIPE_NOT_FOUND));
@@ -53,5 +55,15 @@ public class RecipeService {
         recipe.update(requestDto.getTitle(), requestDto.getIngredients(), requestDto.getInstructions());
         
         return new RecipeUpdateResponseDto(recipe.getId(), recipe.getTitle());
+    }
+
+    @Transactional
+    public RecipeDeleteResponseDto deleteRecipe(Long id) {
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RECIPE_NOT_FOUND));
+        
+        recipeRepository.deleteById(id);
+        
+        return new RecipeDeleteResponseDto(recipe.getId(), recipe.getTitle());
     }
 }
