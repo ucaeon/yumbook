@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ucaeon.yumbook.common.dto.ApiResponseDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeCreateResponseDto;
+import com.ucaeon.yumbook.global.response.ApiResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeUpdateRequestDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeUpdateResponseDto;
-import com.ucaeon.yumbook.recipe.dto.RecipeDeleteResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeResponseDto;
 import com.ucaeon.yumbook.recipe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 
@@ -31,11 +28,11 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @PostMapping
-    public ResponseEntity<ApiResponseDto<RecipeCreateResponseDto>> createRecipe(@Valid @RequestBody RecipeCreateRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto<RecipeResponseDto>> createRecipe(@Valid @RequestBody RecipeRequestDto requestDto) {
         Long recipeId = recipeService.createRecipe(requestDto);
-        RecipeCreateResponseDto responseData = new RecipeCreateResponseDto(recipeId);
+        RecipeResponseDto responseData = new RecipeResponseDto(recipeId, requestDto.getTitle());
 
-        ApiResponseDto<RecipeCreateResponseDto> responseBody = ApiResponseDto.success(
+        ApiResponseDto<RecipeResponseDto> responseBody = ApiResponseDto.success(
                 HttpStatus.CREATED,
                 "레시피 생성에 성공했습니다.",
                 responseData
@@ -71,10 +68,10 @@ public class RecipeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe( @PathVariable Long id, @Valid @RequestBody RecipeUpdateRequestDto requestDto) {
-        RecipeUpdateResponseDto recipe = recipeService.updateRecipe(id, requestDto);
+    public ResponseEntity<ApiResponseDto<RecipeResponseDto>> updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeRequestDto requestDto) {
+        RecipeResponseDto recipe = recipeService.updateRecipe(id, requestDto);
         
-        ApiResponseDto<RecipeUpdateResponseDto> responseBody = ApiResponseDto.success(
+        ApiResponseDto<RecipeResponseDto> responseBody = ApiResponseDto.success(
                 HttpStatus.OK,
                 "레시피 수정에 성공했습니다.",
                 recipe
@@ -84,10 +81,10 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<RecipeDeleteResponseDto>> deleteRecipe(@PathVariable Long id) {
-        RecipeDeleteResponseDto recipe = recipeService.deleteRecipe(id);
+    public ResponseEntity<ApiResponseDto<RecipeResponseDto>> deleteRecipe(@PathVariable Long id) {
+        RecipeResponseDto recipe = recipeService.deleteRecipe(id);
         
-        ApiResponseDto<RecipeDeleteResponseDto> responseBody = ApiResponseDto.success(
+        ApiResponseDto<RecipeResponseDto> responseBody = ApiResponseDto.success(
                 HttpStatus.OK,
                 "레시피 삭제에 성공했습니다.",
                 recipe
