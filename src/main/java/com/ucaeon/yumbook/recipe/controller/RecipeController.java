@@ -3,6 +3,7 @@ package com.ucaeon.yumbook.recipe.controller;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeUpdateRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeUpdateResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeDeleteResponseDto;
 import com.ucaeon.yumbook.recipe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 
@@ -68,14 +70,25 @@ public class RecipeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe(
-            @PathVariable Long id, 
-            @RequestBody RecipeUpdateRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe( @PathVariable Long id, @RequestBody RecipeUpdateRequestDto requestDto) {
         RecipeUpdateResponseDto recipe = recipeService.updateRecipe(id, requestDto);
         
         ApiResponseDto<RecipeUpdateResponseDto> responseBody = ApiResponseDto.success(
                 HttpStatus.OK,
                 "레시피 수정에 성공했습니다.",
+                recipe
+        );
+        
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponseDto<RecipeDeleteResponseDto>> deleteRecipe(@PathVariable Long id) {
+        RecipeDeleteResponseDto recipe = recipeService.deleteRecipe(id);
+        
+        ApiResponseDto<RecipeDeleteResponseDto> responseBody = ApiResponseDto.success(
+                HttpStatus.OK,
+                "레시피 삭제에 성공했습니다.",
                 recipe
         );
         
