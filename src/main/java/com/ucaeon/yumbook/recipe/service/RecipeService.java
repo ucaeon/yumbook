@@ -52,11 +52,13 @@ public class RecipeService {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.RECIPE_NOT_FOUND));
         
-        recipe.update(requestDto.getTitle(), requestDto.getIngredients(), requestDto.getInstructions());
+        recipe.update(requestDto.getTitle(), requestDto.getIngredients(), requestDto.getInstructions(), 
+                     requestDto.getDifficulty(), requestDto.getCookingTime(), requestDto.getServings());
         
         return new RecipeUpdateResponseDto(recipe.getId(), recipe.getTitle());
     }
 
+    
     @Transactional
     public RecipeDeleteResponseDto deleteRecipe(Long id) {
         Recipe recipe = recipeRepository.findById(id)

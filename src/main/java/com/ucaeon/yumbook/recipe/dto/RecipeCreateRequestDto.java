@@ -22,11 +22,20 @@ public class RecipeCreateRequestDto {
     @Size(max = 2000, message = "조리법은 2000자 이하로 입력해주세요")
     private String instructions;
 
+    private String difficulty;
+
+    private String cookingTime;
+
+    private String servings;
+
     public Recipe toEntity() {
         return Recipe.builder()
                 .title(title)
                 .ingredients(ingredients)
                 .instructions(instructions)
+                .difficulty(difficulty)
+                .cookingTime(cookingTime)
+                .servings(servings)
                 .build();
     }
 }
