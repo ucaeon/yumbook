@@ -10,6 +10,8 @@ import com.ucaeon.yumbook.recipe.domain.Recipe;
 import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeUpdateRequestDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeUpdateResponseDto;
 import com.ucaeon.yumbook.recipe.repository.RecipeRepository;
 
 import jakarta.transaction.Transactional;
@@ -40,5 +42,16 @@ public class RecipeService {
         Recipe recipe = recipeRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.RECIPE_NOT_FOUND));
         return new RecipeDetailResponseDto(recipe);
+    }
+    
+
+    @Transactional
+    public RecipeUpdateResponseDto updateRecipe(Long id, RecipeUpdateRequestDto requestDto) {
+        Recipe recipe = recipeRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.RECIPE_NOT_FOUND));
+        
+        recipe.update(requestDto.getTitle(), requestDto.getIngredients(), requestDto.getInstructions());
+        
+        return new RecipeUpdateResponseDto(recipe.getId(), recipe.getTitle());
     }
 }

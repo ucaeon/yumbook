@@ -30,4 +30,10 @@ public class Recipe {
         this.ingredients = ingredients;
         this.instructions = instructions;
     }
+
+    public void update(String title, String ingredients, String instructions) {
+        this.title = title;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+    }
 }

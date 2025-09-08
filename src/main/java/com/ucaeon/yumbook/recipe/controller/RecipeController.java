@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,8 @@ import com.ucaeon.yumbook.recipe.dto.RecipeCreateRequestDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeCreateResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeDetailResponseDto;
 import com.ucaeon.yumbook.recipe.dto.RecipeListResponseDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeUpdateRequestDto;
+import com.ucaeon.yumbook.recipe.dto.RecipeUpdateResponseDto;
 import com.ucaeon.yumbook.recipe.service.RecipeService;
 import lombok.RequiredArgsConstructor;
 
@@ -37,6 +40,7 @@ public class RecipeController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseBody);
     }
 
+    
     @GetMapping
     public ResponseEntity<ApiResponseDto<List<RecipeListResponseDto>>> getAllRecipes() {
         List<RecipeListResponseDto> recipes = recipeService.getAllRecipes();
@@ -49,6 +53,7 @@ public class RecipeController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto<RecipeDetailResponseDto>> getRecipeById(@PathVariable Long id) {
         RecipeDetailResponseDto recipe = recipeService.getRecipeById(id);
@@ -56,6 +61,21 @@ public class RecipeController {
         ApiResponseDto<RecipeDetailResponseDto> responseBody = ApiResponseDto.success(
                 HttpStatus.OK,
                 "레시피 상세 조회에 성공했습니다.",
+                recipe
+        );
+        
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe(
+            @PathVariable Long id, 
+            @RequestBody RecipeUpdateRequestDto requestDto) {
+        RecipeUpdateResponseDto recipe = recipeService.updateRecipe(id, requestDto);
+        
+        ApiResponseDto<RecipeUpdateResponseDto> responseBody = ApiResponseDto.success(
+                HttpStatus.OK,
+                "레시피 수정에 성공했습니다.",
                 recipe
         );
         
