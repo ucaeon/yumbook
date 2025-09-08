@@ -5,21 +5,21 @@ import lombok.Getter;
 
 @Getter
 public class RecipeDetailResponseDto {
-    private final Long id;
-    private final String title;
-    private final String ingredients;
-    private final String instructions;
-    private final String difficulty;
-    private final String cookingTime;
-    private final String servings;
+  private final Long id;
+  private final String title;
+  private final String ingredients;
+  private final String instructions;
+  private final String difficulty;
+  private final String cookingTime;
+  private final String servings;
 
-    public RecipeDetailResponseDto(Recipe recipe) {
-        this.id = recipe.getId();
-        this.title = recipe.getTitle();
-        this.ingredients = recipe.getIngredients();
-        this.instructions = recipe.getInstructions();
-        this.difficulty = recipe.getDifficulty();
-        this.cookingTime = recipe.getCookingTime();
-        this.servings = recipe.getServings();
-    }
+  public RecipeDetailResponseDto(Recipe recipe) {
+    this.id = recipe.getId();
+    this.title = recipe.getTitle();
+    this.ingredients = recipe.getIngredients();
+    this.instructions = recipe.getInstructions();
+    this.difficulty = recipe.getDifficulty();
+    this.cookingTime = recipe.getCookingTime();
+    this.servings = recipe.getServings();
+  }
 }
