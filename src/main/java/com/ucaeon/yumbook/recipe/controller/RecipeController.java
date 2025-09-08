@@ -3,6 +3,7 @@ package com.ucaeon.yumbook.recipe.controller;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class RecipeController {
     private final RecipeService recipeService;
 
     @PostMapping
-    public ResponseEntity<ApiResponseDto<RecipeCreateResponseDto>> createRecipe(@RequestBody RecipeCreateRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto<RecipeCreateResponseDto>> createRecipe(@Valid @RequestBody RecipeCreateRequestDto requestDto) {
         Long recipeId = recipeService.createRecipe(requestDto);
         RecipeCreateResponseDto responseData = new RecipeCreateResponseDto(recipeId);
 
@@ -70,7 +71,7 @@ public class RecipeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe( @PathVariable Long id, @RequestBody RecipeUpdateRequestDto requestDto) {
+    public ResponseEntity<ApiResponseDto<RecipeUpdateResponseDto>> updateRecipe( @PathVariable Long id, @Valid @RequestBody RecipeUpdateRequestDto requestDto) {
         RecipeUpdateResponseDto recipe = recipeService.updateRecipe(id, requestDto);
         
         ApiResponseDto<RecipeUpdateResponseDto> responseBody = ApiResponseDto.success(
