@@ -19,4 +19,10 @@ public class RecipeUpdateRequestDto {
     @NotBlank(message = "조리법은 필수입니다")
     @Size(max = 2000, message = "조리법은 2000자 이하로 입력해주세요")
     private String instructions;
+
+    private String difficulty;
+
+    private String cookingTime;
+
+    private String servings;
 }
