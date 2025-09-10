@@ -8,11 +8,14 @@ Thumbs.db
 *.temp
 
 # Backend (백엔드 전용 무시 파일)
+.gradle/
 backend/.gradle/
 backend/build/
 backend/out/
 backend/bin/
 backend/src/main/resources/application.properties
+build/
+build/reports/
 
 # Frontend (프론트엔드 전용 무시 파일)
 frontend/node_modules/
@@ -31,3 +34,14 @@ pnpm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
+docker-compose.yml
+env.example
+init.sql
+
+# Git 관련
+.gitattributes
+
+# 빌드 및 캐시 파일
+.gradle/
+build/
+build/reports/
