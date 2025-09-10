@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import type { RecipeFormData, FormMode } from '../types/recipeForm';
 import type { Ingredient, Instruction } from '../types/recipe';
 import type { DifficultyLevel } from '../constants/recipe';
@@ -44,7 +44,7 @@ export const useRecipeForm = ({ mode, initialData, onSubmit }: UseRecipeFormProp
     }
   }, [mode, initialData]);
 
-  const handleInputChange = (field: keyof RecipeFormData, value: string | Ingredient[] | Instruction[]) => {
+  const handleInputChange = useCallback((field: keyof RecipeFormData, value: string | Ingredient[] | Instruction[]) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,
@@ -53,9 +53,9 @@ export const useRecipeForm = ({ mode, initialData, onSubmit }: UseRecipeFormProp
     // 해당 필드의 에러 제거
     if (!errors.length) return;
     setErrors(prev => prev.filter(error => error.field !== field));
-  };
+  }, [errors]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
     // 유효성 검사
@@ -73,7 +73,7 @@ export const useRecipeForm = ({ mode, initialData, onSubmit }: UseRecipeFormProp
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, onSubmit]);
 
   const resetForm = () => {
     setFormData({

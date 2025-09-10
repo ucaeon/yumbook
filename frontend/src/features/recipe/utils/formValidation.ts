@@ -11,8 +11,6 @@ export const validateRecipeForm = (data: RecipeFormData): ValidationError[] => {
   // 제목 검증
   if (!data.title.trim()) {
     errors.push({ field: 'title', message: '레시피 제목을 입력해주세요.' });
-  } else if (data.title.trim().length < 2) {
-    errors.push({ field: 'title', message: '제목은 2글자 이상 입력해주세요.' });
   } else if (data.title.trim().length > 100) {
     errors.push({ field: 'title', message: '제목은 100글자 이하로 입력해주세요.' });
   }
@@ -34,10 +32,10 @@ export const validateRecipeForm = (data: RecipeFormData): ValidationError[] => {
     errors.push({ field: 'instructions', message: '조리법을 입력해주세요.' });
   } else {
     const hasValidInstruction = data.instructions.some(instruction => 
-      instruction.step.trim().length >= 5
+      instruction.step.trim().length > 0
     );
     if (!hasValidInstruction) {
-      errors.push({ field: 'instructions', message: '조리법은 5글자 이상 입력해주세요.' });
+      errors.push({ field: 'instructions', message: '조리법을 입력해주세요.' });
     }
   }
 

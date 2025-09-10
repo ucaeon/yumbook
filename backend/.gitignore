@@ -39,3 +39,8 @@ out/
 
 ### 추가 파일
 src/main/resources/application.properties
+.gradle/
+.idea/
+.vscode/
+build/
+.gitattributes
