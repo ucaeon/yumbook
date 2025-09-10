@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
 import { useRecipeForm } from '../hooks/useRecipeForm';
 import { getFieldError, validateRecipeForm } from '../utils/formValidation';
 import { FORM_PLACEHOLDERS, FORM_LABELS, FORM_MESSAGES } from '../constants/formConstants';
 import { COMMON_STYLES } from '../constants/recipe';
 import { cn } from '../../../shared/utils/cn';
+import Button from '../../common/components/Button';
 import type { RecipeFormProps } from '../types/recipeForm';
 import type { DifficultyLevel } from '../constants/recipe';
-import RecipeFormHeader from './RecipeFormHeader';
 import FormField from './FormField';
 import DifficultySelector from './DifficultySelector';
 import IngredientField from './IngredientField';
@@ -28,15 +29,15 @@ const RecipeForm = ({ mode, initialData, onSubmit, onCancel, loading = false }: 
     onSubmit,
   });
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     if (onCancel) {
       onCancel();
       return;
     }
     navigate('/');
-  };
+  }, [onCancel, navigate]);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     // 폼 제출을 직접 처리
     const validationErrors = validateRecipeForm(formData);
     if (validationErrors.length > 0) {
@@ -45,19 +46,12 @@ const RecipeForm = ({ mode, initialData, onSubmit, onCancel, loading = false }: 
     }
     
     onSubmit(formData);
-  };
+  }, [formData, onSubmit, setErrors]);
 
   const messages = FORM_MESSAGES[mode];
 
   return (
     <div className="min-h-screen bg-white">
-      <RecipeFormHeader
-        mode={mode}
-        onSave={handleSave}
-        onCancel={handleCancel}
-        isSubmitting={isSubmitting || loading}
-      />
-
       {/* Page Title Section with Background Image */}
       <section 
         className="relative py-24 px-4"
@@ -181,6 +175,36 @@ const RecipeForm = ({ mode, initialData, onSubmit, onCancel, loading = false }: 
 
             </div>
           </form>
+
+          {/* Action Buttons */}
+          <div className="mt-8 text-center">
+            <div className="flex justify-center space-x-4">
+              <Button 
+                onClick={handleSave}
+                variant="edit"
+                disabled={isSubmitting || loading}
+                icon={
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                  </svg>
+                }
+              >
+                {isSubmitting || loading ? '저장 중...' : '저장'}
+              </Button>
+              <Button
+                onClick={handleCancel}
+                variant="delete"
+                disabled={isSubmitting || loading}
+                icon={
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                }
+              >
+                취소
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>

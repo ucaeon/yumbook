@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import RecipeForm from '../features/recipe/components/RecipeForm';
 import { recipeService } from '../features/recipe/services/recipeService';
 import { useToastNotification } from '../shared/hooks/useToastNotification';
@@ -10,6 +10,7 @@ import type { Recipe } from '../features/recipe/types/recipe';
 const EditRecipePage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,16 @@ const EditRecipePage = () => {
     try {
       await recipeService.updateRecipe(parseInt(id), data);
       showSuccess('레시피 수정 완료', '레시피가 성공적으로 수정되었습니다.');
-      navigate('/');
+      
+      // 이전 페이지가 상세페이지인지 확인
+      const fromDetailPage = location.state?.from === 'detail' || 
+                            document.referrer.includes(`/recipe/${id}`);
+      
+      if (fromDetailPage) {
+        navigate(`/recipe/${id}`);
+      } else {
+        navigate('/');
+      }
     } catch (error) {
       showError('레시피 수정 실패', '레시피 수정 중 오류가 발생했습니다.');
       console.error('레시피 수정 실패:', error);
@@ -51,7 +61,15 @@ const EditRecipePage = () => {
   };
 
   const handleCancel = () => {
-    navigate('/');
+    // 이전 페이지가 상세페이지인지 확인
+    const fromDetailPage = location.state?.from === 'detail' || 
+                          document.referrer.includes(`/recipe/${id}`);
+    
+    if (fromDetailPage) {
+      navigate(`/recipe/${id}`);
+    } else {
+      navigate('/');
+    }
   };
 
   if (!recipe && !loading && !error) {
