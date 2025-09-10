@@ -1,6 +1,5 @@
 import Modal from './Modal';
 import Button from '../../features/common/components/Button';
-import { cn } from '../utils/cn';
 import type { ConfirmModalProps } from '../types/modal';
 
 const ConfirmModal = ({

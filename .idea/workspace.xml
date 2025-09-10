@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cd1f77a-8cb1-40fc-9d2d-4d8ff11e57d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
-    </list>
+    <list default="true" id="1cd1f77a-8cb1-40fc-9d2d-4d8ff11e57d2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,38 +65,39 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build yumbook.executor": "Run",
-    "Gradle.RecipeControllerTest.executor": "Run",
-    "Gradle.RecipeRepositoryTest.executor": "Run",
-    "Gradle.RecipeRepositoryTest.updateRecipe.executor": "Run",
-    "Gradle.RecipeServiceTest.executor": "Run",
-    "Gradle.RecipeServiceTest.레시피_생성_테스트.executor": "Run",
-    "Gradle.yumbook [spotlessApply].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.YumbookApplication.executor": "Run",
-    "git-widget-placeholder": "feature/main-page-ui-components",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/82105/Desktop/yumbook/yumbook",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build backend.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build yumbook.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RecipeControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RecipeRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RecipeRepositoryTest.updateRecipe.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RecipeServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.RecipeServiceTest.레시피_생성_테스트.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.yumbook [spotlessApply].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.YumbookApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/docker-setup&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/82105/Desktop/yumbook/yumbook&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.YumbookApplication">
     <configuration name="RecipeControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -346,7 +340,7 @@
       <method v="2" />
     </configuration>
     <configuration name="YumbookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <module name="yumbook" />
+      <module name="yumbook.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ucaeon.yumbook.YumbookApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -391,6 +385,8 @@
       <workItem from="1757384319552" duration="37000" />
       <workItem from="1757410420061" duration="391000" />
       <workItem from="1757410904669" duration="620000" />
+      <workItem from="1757515765691" duration="23000" />
+      <workItem from="1757515949234" duration="26000" />
     </task>
     <servers />
   </component>
