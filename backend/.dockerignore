@@ -1,0 +1,33 @@
+# 빌드 결과물
+build
+.gradle
+out
+
+# IDE
+.idea
+.vscode
+*.iml
+*.ipr
+*.iws
+
+# 환경 변수
+.env
+
+# 로그
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# 기타
+README.md
+*.md
