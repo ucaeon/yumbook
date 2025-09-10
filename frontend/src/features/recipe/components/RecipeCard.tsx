@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { RecipeCardProps } from '../types/recipe';
+import type { RecipeCardProps, Ingredient } from '../types/recipe';
 import { cn } from '../../../shared/utils/cn';
-import { DIFFICULTY_COLORS, TAG_COLORS } from '../constants/recipe';
+import { DIFFICULTY_COLORS, TAG_COLORS, UI_CONSTANTS, COMMON_STYLES, type DifficultyLevel } from '../constants/recipe';
 
-const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
+interface RecipeCardPropsWithDelete extends RecipeCardProps {
+  onDelete?: (recipeId: number) => void;
+}
+
+const RecipeCard = ({ recipe, onClick, onDelete }: RecipeCardPropsWithDelete) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -43,9 +47,9 @@ const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     setShowMenu(false);
-    // TODO: 삭제 확인 후 레시피 삭제
-    console.log('레시피 삭제:', recipe.id);
+    onDelete?.(recipe.id);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -55,21 +59,27 @@ const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
     }
   };
 
-  const getDifficultyColor = (difficulty: string) => {
-    return DIFFICULTY_COLORS[difficulty as keyof typeof DIFFICULTY_COLORS] || DIFFICULTY_COLORS.쉬움;
+  const getDifficultyColor = (difficulty: DifficultyLevel) => {
+    return DIFFICULTY_COLORS[difficulty] || DIFFICULTY_COLORS.쉬움;
   };
 
-  const getMainIngredients = (ingredients: string) => {
-    const ingredientList = ingredients.split(',').map(ing => ing.trim());
-    const mainIngredients = ingredientList.slice(0, 3);
-    return `주요 재료: ${mainIngredients.join(', ')}${ingredientList.length > 3 ? '...' : ''}`;
+  const getMainIngredients = (ingredients: Ingredient[]) => {
+    if (!ingredients?.length) {
+      return '재료 정보 없음';
+    }
+    
+    const validIngredients = ingredients.filter(ing => ing.name?.trim());
+    const mainIngredients = validIngredients.slice(0, UI_CONSTANTS.MAX_INGREDIENTS_DISPLAY).map(ing => ing.name);
+    const hasMore = validIngredients.length > UI_CONSTANTS.MAX_INGREDIENTS_DISPLAY;
+    
+    return `주요 재료: ${mainIngredients.join(', ')}${hasMore ? '...' : ''}`;
   };
 
   return (
     <div 
       className={cn(
         'bg-white rounded-2xl shadow-lg p-6 cursor-pointer transition-all duration-300 relative',
-        'hover:shadow-xl hover:-translate-y-2',
+        `hover:shadow-xl hover:${UI_CONSTANTS.CARD_HOVER_TRANSFORM}`,
         'focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2'
       )}
       onClick={handleClick}
@@ -99,7 +109,7 @@ const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
           <div className="absolute right-0 top-full mt-2 bg-white shadow-lg border border-gray-100 rounded-lg py-1 z-10 min-w-[120px]">
             <button
               onClick={handleEdit}
-              className="w-full px-4 py-2 text-left text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2"
+              className={cn(COMMON_STYLES.MENU_ITEM, "text-gray-700 hover:bg-gray-50")}
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -108,7 +118,7 @@ const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
             </button>
             <button
               onClick={handleDelete}
-              className="w-full px-4 py-2 text-left text-sm font-semibold text-red-400 hover:bg-red-50 transition-colors duration-200 flex items-center gap-2"
+              className={cn(COMMON_STYLES.MENU_ITEM, "text-red-400 hover:bg-red-50")}
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" clipRule="evenodd" />
@@ -135,22 +145,23 @@ const RecipeCard = ({ recipe, onClick }: RecipeCardProps) => {
             'text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap',
             getDifficultyColor(recipe.difficulty)
           )}>
-            난이도: {recipe.difficulty}
+            {recipe.difficulty}
           </span>
           <span className={cn(
             'text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap',
             TAG_COLORS.TIME
           )}>
-            시간: {recipe.cookingTime}
+            {recipe.cookingTime}분
           </span>
           <span className={cn(
             'text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap',
             TAG_COLORS.SERVINGS
           )}>
-            {recipe.servings}
+            {recipe.servings}인분
           </span>
         </div>
       </div>
+
     </div>
   );
 };
