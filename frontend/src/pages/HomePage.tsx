@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import { useRecipes } from '../features/recipe/hooks/useRecipes';
 import Layout from '../shared/components/Layout';
 import RecipeGrid from '../features/recipe/components/RecipeGrid';
+import { COMMON_STYLES } from '../features/recipe/constants/recipe';
 import type { Recipe } from '../features/recipe/types/recipe';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { recipes, loading, error } = useRecipes();
+  const { recipes, loading, error, refreshRecipes } = useRecipes();
 
   const handleRecipeClick = (recipe: Recipe) => {
     navigate(`/recipe/${recipe.id}`);
@@ -16,7 +17,7 @@ const HomePage = () => {
     <Layout loading={loading} error={error}>
       {/* Hero Section */}
       <section 
-        className="relative py-20 px-4 bg-cover bg-center bg-no-repeat"
+        className={`relative ${COMMON_STYLES.HERO_PADDING} bg-cover bg-center bg-no-repeat`}
         style={{
           backgroundImage: 'url(/images/yumbook_main_image.png)',
           backgroundColor: '#fef7ee'
@@ -34,11 +35,12 @@ const HomePage = () => {
       </section>
 
       {/* Recipe Grid Section */}
-      <section className="py-16 px-4">
+      <section className={COMMON_STYLES.SECTION_PADDING}>
         <div className="max-w-6xl mx-auto">
           <RecipeGrid 
             recipes={recipes} 
             onRecipeClick={handleRecipeClick}
+            onRecipeDeleted={refreshRecipes}
           />
         </div>
       </section>

@@ -1,13 +1,11 @@
 import { useParams } from 'react-router-dom';
-import Header from '../features/common/components/Header';
+import Layout from '../shared/components/Layout';
 
 const RecipeDetailPage = () => {
   const { id } = useParams<{ id: string }>();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      
+    <Layout>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
           <h1 className="text-3xl font-poppins font-bold text-gray-800 mb-8">
@@ -25,7 +23,7 @@ const RecipeDetailPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

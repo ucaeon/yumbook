@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 import { cn } from '../../../shared/utils/cn';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'success';
+  variant?: 'primary' | 'secondary' | 'outline' | 'success' | 'danger';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -16,7 +16,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       primary: 'bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500 transition-colors duration-200 rounded-lg',
       secondary: 'bg-secondary-600 text-white hover:bg-secondary-700 focus:ring-secondary-500 transition-colors duration-200 rounded-lg',
       outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-primary-500 transition-colors duration-200 rounded-lg',
-      success: 'text-white focus:ring-green-500 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 rounded-full'
+      success: 'text-white focus:ring-green-500 transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 rounded-full',
+      danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 transition-colors duration-200 rounded-lg'
     };
     
     const sizes = {
