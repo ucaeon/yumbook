@@ -16,8 +16,6 @@
 
 
 ## 🗃️ Dependencies
-> 주요 의존성 (세부 내용은 `build.gradle` 참고)
-
 | Dependency   | Version  |
 |--------------|----------|
 | ☕ **Java**  | 17       |
@@ -33,8 +31,7 @@
 
 ## 🛠️ Tech Stack
 ### 🔙 Backend
-- **Framework**: [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.5-brightgreen.svg)](https://spring.io/projects/spring-boot)  
-  (Web, Data JPA, Validation)  
+- **Framework**: [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.5-brightgreen.svg)](https://spring.io/projects/spring-boot) (Web, Data JPA, Validation)  
 - **ORM**: [![Spring Data JPA](https://img.shields.io/badge/Spring%20Data%20JPA-3.5.5-blue.svg)](https://spring.io/projects/spring-data-jpa)  
 - **Database**: [![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com/)  
 - **Build Tool**: [![Gradle](https://img.shields.io/badge/Gradle-7.6.1-green.svg)](https://gradle.org/)
